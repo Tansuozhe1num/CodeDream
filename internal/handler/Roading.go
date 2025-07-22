@@ -5,18 +5,6 @@ import (
 	"net/http"
 )
 
-func HandleStatus(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"code": 0, "data": []string{}})
-}
-
-func HandleSubmit(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"code": 0, "data": []string{}})
-}
-
-func HandleGetData(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"code": 0, "data": []string{}})
-}
-
 type Problem struct {
 	ID      int    `json:"id"`
 	Title   string `json:"title"`
