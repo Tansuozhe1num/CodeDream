@@ -1,8 +1,8 @@
 package router
 
 import (
-	"github.com/Tansuozhe1num/codedream"
-	"github.com/gin-gonic/gin/internal/handler"
+	"github.com/Tansuozhe1num/codedream/internal/handler"
+	"github.com/gin-gonic/gin"
 )
 
 func NewRouter() *gin.Engine {
