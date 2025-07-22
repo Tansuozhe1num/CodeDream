@@ -120,6 +120,7 @@
       font-family: 'Courier New', monospace;
       font-size: 0.9rem;
       overflow-x: auto;
+      white-space: pre-wrap;
     }
 
     .hljs {
@@ -136,346 +137,352 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
+    [v-cloak] {
+      display: none;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
-<!-- 头部导航 -->
-<header class="py-4 px-6 lg:px-12 bg-opacity-80 bg-gray-900 backdrop-blur-md border-b border-gray-700">
-  <div class="container mx-auto flex justify-between items-center">
-    <div class="flex items-center">
-      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center mr-3">
-        <i class="fas fa-code text-white text-xl"></i>
+<div id="app" v-cloak>
+  <!-- 头部导航 -->
+  <header class="py-4 px-6 lg:px-12 bg-opacity-80 bg-gray-900 backdrop-blur-md border-b border-gray-700">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center mr-3">
+          <i class="fas fa-code text-white text-xl"></i>
+        </div>
+        <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Codedream</h1>
       </div>
-      <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Codedream</h1>
+
+      <nav class="hidden md:flex space-x-8">
+        <a href="#" class="text-gray-300 hover:text-white transition">首页</a>
+        <a href="problems.html" class="text-gray-300 hover:text-white transition">刷题</a>
+        <a href="#" class="text-gray-300 hover:text-white transition">教程</a>
+        <a href="community.html" class="text-blue-400 font-medium">社区</a>
+        <a href="#" class="text-gray-300 hover:text-white transition">关于</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+            <span class="text-white font-bold">J</span>
+          </div>
+          <span class="text-gray-300 hidden md:block">开发者J</span>
+        </div>
+        <button class="md:hidden text-gray-300">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
     </div>
+  </header>
 
-    <nav class="hidden md:flex space-x-8">
-      <a href="#" class="text-gray-300 hover:text-white transition">首页</a>
-      <a href="problems.html" class="text-gray-300 hover:text-white transition">刷题</a>
-      <a href="#" class="text-gray-300 hover:text-white transition">教程</a>
-      <a href="community.html" class="text-blue-400 font-medium">社区</a>
-      <a href="#" class="text-gray-300 hover:text-white transition">关于</a>
-    </nav>
-
-    <div class="flex items-center space-x-4">
-      <div class="flex items-center space-x-3">
-        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-          <span class="text-white font-bold">J</span>
-        </div>
-        <span class="text-gray-300 hidden md:block">开发者J</span>
-      </div>
-      <button class="md:hidden text-gray-300">
-        <i class="fas fa-bars text-xl"></i>
-      </button>
-    </div>
-  </div>
-</header>
-
-<!-- 主体内容 -->
-<main class="flex-grow py-8">
-  <div class="container mx-auto px-4 lg:px-8 max-w-7xl">
-    <div class="flex flex-col lg:flex-row gap-8">
-      <!-- 左侧导航 -->
-      <div class="lg:w-1/4">
-        <div class="card rounded-xl p-6 mb-6">
-          <h2 class="text-xl font-bold mb-6">社区分类</h2>
-          <ul class="space-y-4">
-            <li>
-              <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
-                <i class="fas fa-question-circle mr-3 text-blue-400"></i>
-                <span>问题求助</span>
-                <span class="ml-auto bg-blue-500 text-white text-xs px-2 py-1 rounded-full">128</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
-                <i class="fas fa-lightbulb mr-3 text-yellow-400"></i>
-                <span>题解分享</span>
-                <span class="ml-auto bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">342</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
-                <i class="fas fa-comments mr-3 text-green-400"></i>
-                <span>技术讨论</span>
-                <span class="ml-auto bg-green-500 text-white text-xs px-2 py-1 rounded-full">76</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
-                <i class="fas fa-newspaper mr-3 text-purple-400"></i>
-                <span>最新资讯</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
-                <i class="fas fa-star mr-3 text-amber-400"></i>
-                <span>精华内容</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="card rounded-xl p-6">
-          <h2 class="text-xl font-bold mb-6">热门标签</h2>
-          <div class="flex flex-wrap">
-            <span class="tag bg-blue-500/20 text-blue-300">JavaScript</span>
-            <span class="tag bg-purple-500/20 text-purple-300">Python</span>
-            <span class="tag bg-red-500/20 text-red-300">算法</span>
-            <span class="tag bg-green-500/20 text-green-300">React</span>
-            <span class="tag bg-yellow-500/20 text-yellow-300">Vue</span>
-            <span class="tag bg-cyan-500/20 text-cyan-300">数据库</span>
-            <span class="tag bg-pink-500/20 text-pink-300">CSS</span>
-            <span class="tag bg-indigo-500/20 text-indigo-300">Node.js</span>
-            <span class="tag bg-amber-500/20 text-amber-300">数据结构</span>
-            <span class="tag bg-emerald-500/20 text-emerald-300">Webpack</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 中间内容区 -->
-      <div class="lg:w-1/2">
-        <!-- 发布框 -->
-        <div class="card rounded-xl p-6 mb-6">
-          <div class="flex items-center mb-4">
-            <div class="user-avatar mr-3">J</div>
-            <input
-                    type="text"
-                    placeholder="分享你的编程经验或提出技术问题..."
-                    class="flex-grow bg-gray-800 border border-gray-700 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    @click="showEditor = true">
+  <!-- 主体内容 -->
+  <main class="flex-grow py-8">
+    <div class="container mx-auto px-4 lg:px-8 max-w-7xl">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- 左侧导航 -->
+        <div class="lg:w-1/4">
+          <div class="card rounded-xl p-6 mb-6">
+            <h2 class="text-xl font-bold mb-6">社区分类</h2>
+            <ul class="space-y-4">
+              <li>
+                <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
+                  <i class="fas fa-question-circle mr-3 text-blue-400"></i>
+                  <span>问题求助</span>
+                  <span class="ml-auto bg-blue-500 text-white text-xs px-2 py-1 rounded-full">128</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
+                  <i class="fas fa-lightbulb mr-3 text-yellow-400"></i>
+                  <span>题解分享</span>
+                  <span class="ml-auto bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">342</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
+                  <i class="fas fa-comments mr-3 text-green-400"></i>
+                  <span>技术讨论</span>
+                  <span class="ml-auto bg-green-500 text-white text-xs px-2 py-1 rounded-full">76</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
+                  <i class="fas fa-newspaper mr-3 text-purple-400"></i>
+                  <span>最新资讯</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="flex items-center text-gray-300 hover:text-white transition">
+                  <i class="fas fa-star mr-3 text-amber-400"></i>
+                  <span>精华内容</span>
+                </a>
+              </li>
+            </ul>
           </div>
 
-          <div v-if="showEditor" class="mt-4">
-            <div class="editor-toolbar rounded-t-lg p-2 flex space-x-2">
-              <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
-                <i class="fas fa-bold"></i>
-              </button>
-              <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
-                <i class="fas fa-italic"></i>
-              </button>
-              <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
-                <i class="fas fa-link"></i>
-              </button>
-              <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
-                <i class="fas fa-code"></i>
-              </button>
-              <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
-                <i class="fas fa-image"></i>
-              </button>
-            </div>
-
-            <textarea
-                    v-model="newPost.content"
-                    class="w-full bg-gray-800 rounded-b-lg p-4 min-h-[150px] focus:outline-none"
-                    placeholder="详细描述你的问题或分享..."
-            ></textarea>
-
-            <div class="flex items-center justify-between mt-4">
-              <div class="flex space-x-2">
-                <select v-model="newPost.type" class="bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none">
-                  <option value="question">问题求助</option>
-                  <option value="solution">题解分享</option>
-                  <option value="discussion">技术讨论</option>
-                </select>
-
-                <div class="flex items-center bg-gray-800 border border-gray-700 rounded-md px-3 py-2">
-                  <i class="fas fa-tag mr-2 text-gray-400"></i>
-                  <input
-                          type="text"
-                          v-model="newPost.tagInput"
-                          placeholder="添加标签"
-                          class="bg-transparent focus:outline-none w-24"
-                          @keydown.enter="addTag"
-                  >
-                </div>
-              </div>
-
-              <div class="flex space-x-3">
-                <button
-                        class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition"
-                        @click="showEditor = false"
-                >
-                  取消
-                </button>
-                <button
-                        class="btn-primary px-4 py-2 rounded-lg font-medium"
-                        @click="submitPost"
-                >
-                  发布
-                </button>
-              </div>
-            </div>
-
-            <div class="flex flex-wrap mt-3">
-              <span
-                      v-for="(tag, index) in newPost.tags"
-                      :key="index"
-                      class="tag bg-blue-500/20 text-blue-300 flex items-center mr-2 mb-2"
-              >
-                {{ tag }}
-                <i class="fas fa-times ml-1 text-xs cursor-pointer" @click="removeTag(index)"></i>
-              </span>
+          <div class="card rounded-xl p-6">
+            <h2 class="text-xl font-bold mb-6">热门标签</h2>
+            <div class="flex flex-wrap">
+              <span class="tag bg-blue-500/20 text-blue-300">JavaScript</span>
+              <span class="tag bg-purple-500/20 text-purple-300">Python</span>
+              <span class="tag bg-red-500/20 text-red-300">算法</span>
+              <span class="tag bg-green-500/20 text-green-300">React</span>
+              <span class="tag bg-yellow-500/20 text-yellow-300">Vue</span>
+              <span class="tag bg-cyan-500/20 text-cyan-300">数据库</span>
+              <span class="tag bg-pink-500/20 text-pink-300">CSS</span>
+              <span class="tag bg-indigo-500/20 text-indigo-300">Node.js</span>
+              <span class="tag bg-amber-500/20 text-amber-300">数据结构</span>
+              <span class="tag bg-emerald-500/20 text-emerald-300">Webpack</span>
             </div>
           </div>
         </div>
 
-        <!-- 内容分类标签 -->
-        <div class="flex border-b border-gray-700 mb-6">
-          <button
-                  v-for="tab in tabs"
-                  :key="tab.id"
-                  @click="activeTab = tab.id"
-                  :class="['px-4 py-2 font-medium text-gray-300 hover:text-white transition',
-                     activeTab === tab.id ? 'active-tab' : '']"
-          >
-            {{ tab.label }}
-          </button>
-        </div>
+        <!-- 中间内容区 -->
+        <div class="lg:w-1/2">
+          <!-- 发布框 -->
+          <div class="card rounded-xl p-6 mb-6">
+            <div class="flex items-center mb-4">
+              <div class="user-avatar mr-3">J</div>
+              <input
+                      type="text"
+                      placeholder="分享你的编程经验或提出技术问题..."
+                      class="flex-grow bg-gray-800 border border-gray-700 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      @click="showEditor = true">
+            </div>
 
-        <!-- 内容列表 -->
-        <div class="space-y-6">
-          <!-- 单个帖子 -->
-          <div
-                  v-for="post in filteredPosts"
-                  :key="post.id"
-                  class="card rounded-xl p-6 post-card"
-          >
-            <div class="flex items-start">
-              <!-- 投票区域 -->
-              <div class="flex flex-col items-center mr-4">
-                <button
-                        class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-500/20"
-                        @click="toggleUpvote(post)"
-                >
-                  <i
-                          :class="['fas fa-arrow-up text-xl',
-                            post.userVote === 'up' ? 'text-blue-400' : 'text-gray-400']"
-                  ></i>
+            <div v-if="showEditor" class="mt-4">
+              <div class="editor-toolbar rounded-t-lg p-2 flex space-x-2">
+                <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
+                  <i class="fas fa-bold"></i>
                 </button>
-                <span class="my-1 font-bold">{{ post.votes }}</span>
-                <button
-                        class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-500/20"
-                        @click="toggleDownvote(post)"
-                >
-                  <i
-                          :class="['fas fa-arrow-down text-xl',
-                            post.userVote === 'down' ? 'text-red-400' : 'text-gray-400']"
-                  ></i>
+                <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
+                  <i class="fas fa-italic"></i>
+                </button>
+                <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
+                  <i class="fas fa-link"></i>
+                </button>
+                <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
+                  <i class="fas fa-code"></i>
+                </button>
+                <button class="w-8 h-8 rounded-md flex items-center justify-center hover:bg-gray-700">
+                  <i class="fas fa-image"></i>
                 </button>
               </div>
 
-              <!-- 内容区域 -->
-              <div class="flex-grow">
-                <!-- 用户信息 -->
-                <div class="flex items-center mb-3">
-                  <div class="user-avatar mr-3">{{ post.author.charAt(0) }}</div>
-                  <div>
-                    <div class="font-medium">{{ post.author }}</div>
-                    <div class="text-gray-400 text-sm">{{ post.time }}</div>
-                  </div>
-                  <span
-                          :class="['ml-3 px-2 py-1 rounded-full text-xs font-medium',
-                            post.type === 'question' ? 'bg-blue-500/20 text-blue-300' :
-                            post.type === 'solution' ? 'bg-yellow-500/20 text-yellow-300' :
-                            'bg-green-500/20 text-green-300']"
-                  >
-                    {{ post.type === 'question' ? '问题' :
-                       post.type === 'solution' ? '题解' : '讨论' }}
-                  </span>
-                </div>
+              <textarea
+                      v-model="newPost.content"
+                      class="w-full bg-gray-800 rounded-b-lg p-4 min-h-[150px] focus:outline-none"
+                      placeholder="详细描述你的问题或分享..."
+              ></textarea>
 
-                <!-- 标题 -->
-                <h3 class="text-xl font-bold mb-2 cursor-pointer" @click="viewPostDetail(post)">
-                  {{ post.title }}
-                </h3>
+              <div class="flex items-center justify-between mt-4">
+                <div class="flex space-x-2">
+                  <select v-model="newPost.type" class="bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none">
+                    <option value="question">问题求助</option>
+                    <option value="solution">题解分享</option>
+                    <option value="discussion">技术讨论</option>
+                  </select>
 
-                <!-- 内容预览 - 修复内容显示问题 -->
-                <div class="text-gray-300 mb-4">
-                  <div v-if="post.type === 'solution'" class="code-block">
-                    <pre>{{ post.content }}</pre>
-                  </div>
-                  <div v-else class="line-clamp-2">
-                    {{ post.content }}
+                  <div class="flex items-center bg-gray-800 border border-gray-700 rounded-md px-3 py-2">
+                    <i class="fas fa-tag mr-2 text-gray-400"></i>
+                    <input
+                            type="text"
+                            v-model="newPost.tagInput"
+                            placeholder="添加标签"
+                            class="bg-transparent focus:outline-none w-24"
+                            @keydown.enter="addTag"
+                    >
                   </div>
                 </div>
 
-                <!-- 标签 -->
-                <div class="flex flex-wrap mb-4">
-                  <span
-                          v-for="(tag, index) in post.tags"
-                          :key="index"
-                          class="tag bg-blue-500/20 text-blue-300"
-                  >
-                    {{ tag }}
-                  </span>
-                </div>
-
-                <!-- 操作按钮 -->
-                <div class="flex text-gray-400 text-sm">
+                <div class="flex space-x-3">
                   <button
-                          class="flex items-center mr-6 hover:text-blue-400"
-                          @click="toggleComments(post)"
+                          class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition"
+                          @click="showEditor = false"
                   >
-                    <i class="far fa-comment mr-1"></i>
-                    {{ post.comments.length }} 条评论
+                    取消
                   </button>
                   <button
-                          class="flex items-center mr-6 hover:text-yellow-400"
-                          @click="toggleBookmark(post)"
+                          class="btn-primary px-4 py-2 rounded-lg font-medium"
+                          @click="submitPost"
+                  >
+                    发布
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap mt-3">
+                <span
+                        v-for="(tag, index) in newPost.tags"
+                        :key="index"
+                        class="tag bg-blue-500/20 text-blue-300 flex items-center mr-2 mb-2"
+                >
+                  {{ tag }}
+                  <i class="fas fa-times ml-1 text-xs cursor-pointer" @click="removeTag(index)"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 内容分类标签 -->
+          <div class="flex border-b border-gray-700 mb-6">
+            <button
+                    v-for="tab in tabs"
+                    :key="tab.id"
+                    @click="activeTab = tab.id"
+                    :class="['px-4 py-2 font-medium text-gray-300 hover:text-white transition',
+                       activeTab === tab.id ? 'active-tab' : '']"
+            >
+              {{ tab.label }}
+            </button>
+          </div>
+
+          <!-- 内容列表 -->
+          <div class="space-y-6">
+            <!-- 单个帖子 -->
+            <div
+                    v-for="post in filteredPosts"
+                    :key="post.id"
+                    class="card rounded-xl p-6 post-card"
+            >
+              <div class="flex items-start">
+                <!-- 投票区域 -->
+                <div class="flex flex-col items-center mr-4">
+                  <button
+                          class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-500/20"
+                          @click="toggleUpvote(post)"
                   >
                     <i
-                            :class="['mr-1',
-                              post.bookmarked ? 'fas fa-bookmark text-yellow-400' : 'far fa-bookmark']"
+                            :class="['fas fa-arrow-up text-xl',
+                              post.userVote === 'up' ? 'text-blue-400' : 'text-gray-400']"
                     ></i>
-                    收藏
                   </button>
-                  <button class="flex items-center hover:text-red-400">
-                    <i class="fas fa-flag mr-1"></i>
-                    举报
+                  <span class="my-1 font-bold">{{ post.votes }}</span>
+                  <button
+                          class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-500/20"
+                          @click="toggleDownvote(post)"
+                  >
+                    <i
+                            :class="['fas fa-arrow-down text-xl',
+                              post.userVote === 'down' ? 'text-red-400' : 'text-gray-400']"
+                    ></i>
                   </button>
                 </div>
 
-                <!-- 评论区域 -->
-                <div v-if="post.showComments" class="mt-6">
-                  <!-- 添加评论 -->
-                  <div class="flex items-start mb-4">
-                    <div class="user-avatar mr-3">J</div>
-                    <div class="flex-grow">
-                      <textarea
-                              v-model="post.newComment"
-                              class="w-full bg-gray-800 rounded-lg p-3 focus:outline-none"
-                              placeholder="写下你的评论..."
-                              rows="2"
-                      ></textarea>
-                      <div class="flex justify-end mt-2">
-                        <button
-                                class="btn-primary px-4 py-2 rounded-lg font-medium text-sm"
-                                @click="addComment(post)"
-                        >
-                          提交评论
-                        </button>
-                      </div>
+                <!-- 内容区域 -->
+                <div class="flex-grow">
+                  <!-- 用户信息 -->
+                  <div class="flex items-center mb-3">
+                    <div class="user-avatar mr-3">{{ post.author.charAt(0) }}</div>
+                    <div>
+                      <div class="font-medium">{{ post.author }}</div>
+                      <div class="text-gray-400 text-sm">{{ post.time }}</div>
+                    </div>
+                    <span
+                            :class="['ml-3 px-2 py-1 rounded-full text-xs font-medium',
+                              post.type === 'question' ? 'bg-blue-500/20 text-blue-300' :
+                              post.type === 'solution' ? 'bg-yellow-500/20 text-yellow-300' :
+                              'bg-green-500/20 text-green-300']"
+                    >
+                      {{ post.type === 'question' ? '问题' :
+                         post.type === 'solution' ? '题解' : '讨论' }}
+                    </span>
+                  </div>
+
+                  <!-- 标题 -->
+                  <h3 class="text-xl font-bold mb-2 cursor-pointer" @click="viewPostDetail(post)">
+                    {{ post.title }}
+                  </h3>
+
+                  <!-- 内容预览 -->
+                  <div class="text-gray-300 mb-4">
+                    <div v-if="post.type === 'solution'" class="code-block">
+                      <pre>{{ post.content }}</pre>
+                    </div>
+                    <div v-else class="line-clamp-2">
+                      {{ post.content }}
                     </div>
                   </div>
 
-                  <!-- 评论列表 -->
-                  <div class="space-y-4">
-                    <div
-                            v-for="(comment, cIndex) in post.comments"
-                            :key="cIndex"
-                            class="comment-box rounded-lg p-4"
+                  <!-- 标签 -->
+                  <div class="flex flex-wrap mb-4">
+                    <span
+                            v-for="(tag, index) in post.tags"
+                            :key="index"
+                            class="tag bg-blue-500/20 text-blue-300"
                     >
-                      <div class="flex items-center mb-2">
-                        <div class="user-avatar mr-3" :style="{ background: comment.bgColor }">
-                          {{ comment.author.charAt(0) }}
-                        </div>
-                        <div>
-                          <div class="font-medium">{{ comment.author }}</div>
-                          <div class="text-gray-400 text-sm">{{ comment.time }}</div>
+                      {{ tag }}
+                    </span>
+                  </div>
+
+                  <!-- 操作按钮 -->
+                  <div class="flex text-gray-400 text-sm">
+                    <button
+                            class="flex items-center mr-6 hover:text-blue-400"
+                            @click="toggleComments(post)"
+                    >
+                      <i class="far fa-comment mr-1"></i>
+                      {{ post.comments.length }} 条评论
+                    </button>
+                    <button
+                            class="flex items-center mr-6 hover:text-yellow-400"
+                            @click="toggleBookmark(post)"
+                    >
+                      <i
+                              :class="['mr-1',
+                                post.bookmarked ? 'fas fa-bookmark text-yellow-400' : 'far fa-bookmark']"
+                      ></i>
+                      收藏
+                    </button>
+                    <button class="flex items-center hover:text-red-400">
+                      <i class="fas fa-flag mr-1"></i>
+                      举报
+                    </button>
+                  </div>
+
+                  <!-- 评论区域 -->
+                  <div v-if="post.showComments" class="mt-6">
+                    <!-- 添加评论 -->
+                    <div class="flex items-start mb-4">
+                      <div class="user-avatar mr-3">J</div>
+                      <div class="flex-grow">
+                        <textarea
+                                v-model="post.newComment"
+                                class="w-full bg-gray-800 rounded-lg p-3 focus:outline-none"
+                                placeholder="写下你的评论..."
+                                rows="2"
+                        ></textarea>
+                        <div class="flex justify-end mt-2">
+                          <button
+                                  class="btn-primary px-4 py-2 rounded-lg font-medium text-sm"
+                                  @click="addComment(post)"
+                          >
+                            提交评论
+                          </button>
                         </div>
                       </div>
-                      <p class="text-gray-300">{{ comment.content }}</p>
+                    </div>
+
+                    <!-- 评论列表 -->
+                    <div class="space-y-4">
+                      <div
+                              v-for="(comment, cIndex) in post.comments"
+                              :key="cIndex"
+                              class="comment-box rounded-lg p-4"
+                      >
+                        <div class="flex items-center mb-2">
+                          <div class="user-avatar mr-3" :style="{ background: comment.bgColor }">
+                            {{ comment.author.charAt(0) }}
+                          </div>
+                          <div>
+                            <div class="font-medium">{{ comment.author }}</div>
+                            <div class="text-gray-400 text-sm">{{ comment.time }}</div>
+                          </div>
+                        </div>
+                        <p class="text-gray-300">{{ comment.content }}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -483,119 +490,119 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- 右侧信息栏 -->
-      <div class="lg:w-1/4">
-        <!-- 热门帖子 -->
-        <div class="card rounded-xl p-6 mb-6">
-          <h2 class="text-xl font-bold mb-4">热门帖子</h2>
-          <ul class="space-y-4">
-            <li
-                    v-for="post in hotPosts"
-                    :key="post.id"
-                    class="flex items-start hover:text-blue-300 cursor-pointer"
-                    @click="viewPostDetail(post)"
-            >
-              <div class="bg-blue-500/10 text-blue-300 text-sm px-2 py-1 rounded mr-3 mt-1">
-                {{ post.votes }}
-              </div>
-              <span class="line-clamp-2">{{ post.title }}</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- 活跃用户 -->
-        <div class="card rounded-xl p-6">
-          <h2 class="text-xl font-bold mb-4">活跃用户</h2>
-          <ul class="space-y-4">
-            <li
-                    v-for="user in activeUsers"
-                    :key="user.id"
-                    class="flex items-center"
-            >
-              <div class="user-avatar mr-3" :style="{ background: user.bgColor }">
-                {{ user.name.charAt(0) }}
-              </div>
-              <div>
-                <div class="font-medium">{{ user.name }}</div>
-                <div class="text-gray-400 text-sm">{{ user.reputation }} 声望</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
-
-<!-- 页脚 -->
-<footer class="bg-gray-900 border-t border-gray-800 mt-12">
-  <div class="container mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div>
-        <div class="flex items-center mb-6">
-          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center mr-3">
-            <i class="fas fa-code text-white text-xl"></i>
+        <!-- 右侧信息栏 -->
+        <div class="lg:w-1/4">
+          <!-- 热门帖子 -->
+          <div class="card rounded-xl p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4">热门帖子</h2>
+            <ul class="space-y-4">
+              <li
+                      v-for="post in hotPosts"
+                      :key="post.id"
+                      class="flex items-start hover:text-blue-300 cursor-pointer"
+                      @click="viewPostDetail(post)"
+              >
+                <div class="bg-blue-500/10 text-blue-300 text-sm px-2 py-1 rounded mr-3 mt-1">
+                  {{ post.votes }}
+                </div>
+                <span class="line-clamp-2">{{ post.title }}</span>
+              </li>
+            </ul>
           </div>
-          <h2 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Codedream</h2>
-        </div>
-        <p class="text-gray-400 mb-6">
-          为开发者打造的梦想平台，提供学习、实践和交流的全方位服务。
-        </p>
-        <div class="flex space-x-4">
-          <a href="#" class="text-gray-400 hover:text-white transition">
-            <i class="fab fa-github text-xl"></i>
-          </a>
-          <a href="#" class="text-gray-400 hover:text-white transition">
-            <i class="fab fa-twitter text-xl"></i>
-          </a>
-          <a href="#" class="text-gray-400 hover:text-white transition">
-            <i class="fab fa-linkedin text-xl"></i>
-          </a>
-          <a href="#" class="text-gray-400 hover:text-white transition">
-            <i class="fab fa-discord text-xl"></i>
-          </a>
-        </div>
-      </div>
 
-      <div>
-        <h3 class="text-lg font-bold mb-6">刷题</h3>
-        <ul class="space-y-3">
-          <li><a href="#" class="text-gray-400 hover:text-white transition">学习平台</a></li>
-          <li><a href="#" class="text-gray-400 hover:text-white transition">代码编辑器</a></li>
-          <li><a href="#" class="text-gray-400 hover:text-white transition">项目托管</a></li>
-          <li><a href="#" class="text-gray-400 hover:text-white transition">开发者工具</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-lg font-bold mb-6">资源</h3>
-        <ul class="space-y-3">
-          <li><a href="#" class="text-gray-400 hover:text-white transition">文档中心</a></li>
-          <li><a href="#" class="text-gray-400 hover:text-white transition">教程视频</a></li>
-          <li><a href="#" class="text-gray-400 hover:text-white transition">博客文章</a></li>
-          <li><a href="#" class="text-gray-400 hover:text-white transition">社区论坛</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-lg font-bold mb-6">订阅更新</h3>
-        <p class="text-gray-400 mb-4">订阅我们的新闻通讯，获取最新刷题更新和开发技巧。</p>
-        <div class="flex">
-          <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 bg-gray-800 rounded-l-lg focus:outline-none w-full">
-          <button class="bg-blue-600 hover:bg-blue-700 px-4 rounded-r-lg">
-            <i class="fas fa-paper-plane"></i>
-          </button>
+          <!-- 活跃用户 -->
+          <div class="card rounded-xl p-6">
+            <h2 class="text-xl font-bold mb-4">活跃用户</h2>
+            <ul class="space-y-4">
+              <li
+                      v-for="user in activeUsers"
+                      :key="user.id"
+                      class="flex items-center"
+              >
+                <div class="user-avatar mr-3" :style="{ background: user.bgColor }">
+                  {{ user.name.charAt(0) }}
+                </div>
+                <div>
+                  <div class="font-medium">{{ user.name }}</div>
+                  <div class="text-gray-400 text-sm">{{ user.reputation }} 声望</div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+  </main>
 
-    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-      <p>© 2025 Codedream. 保留所有权利。</p>
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 border-t border-gray-800 mt-12">
+    <div class="container mx-auto px-6 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-6">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center mr-3">
+              <i class="fas fa-code text-white text-xl"></i>
+            </div>
+            <h2 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Codedream</h2>
+          </div>
+          <p class="text-gray-400 mb-6">
+            为开发者打造的梦想平台，提供学习、实践和交流的全方位服务。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-github text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-twitter text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-linkedin text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-discord text-xl"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold mb-6">刷题</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition">学习平台</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">代码编辑器</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">项目托管</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">开发者工具</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold mb-6">资源</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition">文档中心</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">教程视频</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">博客文章</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition">社区论坛</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold mb-6">订阅更新</h3>
+          <p class="text-gray-400 mb-4">订阅我们的新闻通讯，获取最新刷题更新和开发技巧。</p>
+          <div class="flex">
+            <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 bg-gray-800 rounded-l-lg focus:outline-none w-full">
+            <button class="bg-blue-600 hover:bg-blue-700 px-4 rounded-r-lg">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+        <p>© 2025 Codedream. 保留所有权利。</p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
+</div>
 
 <!-- 引入 Vue.js -->
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -726,7 +733,7 @@
       };
 
       // 提交帖子
-      const submitPost = async () => {
+      const submitPost = () => {
         if (!newPost.content.trim()) return;
 
         // 创建新帖子对象
@@ -821,7 +828,12 @@
         showEditor,
         activeTab,
         newPost,
-        tabs,
+        tabs: [
+          { id: 'all', label: '全部' },
+          { id: 'question', label: '问题' },
+          { id: 'solution', label: '题解' },
+          { id: 'discussion', label: '讨论' }
+        ],
         posts,
         hotPosts,
         activeUsers,
