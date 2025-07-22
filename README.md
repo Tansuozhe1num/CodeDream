@@ -7,12 +7,17 @@ ACM选手，做一个刷题平台
 后端： Go
 
 启动项目：
+
 前端：
+
 cd CodeDream/fronter
+
 npm run build
+
 npm run dev
 
 后端：
+
 运行main.go
 
 访问localhost:8080查看效果，觉得不错请点赞
