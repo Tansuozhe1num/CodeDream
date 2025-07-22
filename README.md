@@ -11,7 +11,7 @@ cd CodeDream/fronter
 npm run build
 npm run dev
 
-后段：
+后端：
 运行main.go
 
 访问localhost:8080查看效果，觉得不错请点赞
