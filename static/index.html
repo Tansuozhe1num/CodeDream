@@ -1,10 +1,505 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codedream - 编程梦想平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#7c3aed',
+            accent: '#0ea5e9',
+            dark: '#1e293b',
+            light: '#f8fafc'
+          },
+          fontFamily: {
+            'sans': ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #f1f5f9;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 15px rgba(37, 99, 235, 0.4);
+    }
+
+    .hero-section {
+      background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.15), transparent 40%),
+      radial-gradient(circle at bottom left, rgba(124, 58, 237, 0.15), transparent 40%);
+    }
+
+    .glow-text {
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+    }
+
+    .floating {
+      animation: floating 6s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .wave {
+      animation: wave 8s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+      transform: translate3d(0, 0, 0);
+    }
+
+    @keyframes wave {
+      0% { margin-left: 0; }
+      100% { margin-left: -1600px; }
+    }
+  </style>
 </head>
-<body>
-$END$
+<body class="min-h-screen flex flex-col">
+<!-- 头部导航 -->
+<header class="py-4 px-6 lg:px-12 bg-opacity-80 bg-gray-900 backdrop-blur-md border-b border-gray-700">
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="flex items-center">
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center mr-3">
+        <i class="fas fa-code text-white text-xl"></i>
+      </div>
+      <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Codedream</h1>
+    </div>
+
+    <nav class="hidden md:flex space-x-8">
+      <a href="#" class="text-gray-300 hover:text-white transition">首页</a>
+      <a href="problems.html" class="text-gray-300 hover:text-white transition">刷题</a>
+      <a href="#" class="text-gray-300 hover:text-white transition">教程</a>
+      <a href="#" class="text-gray-300 hover:text-white transition">社区</a>
+      <a href="#" class="text-gray-300 hover:text-white transition">关于</a>
+    </nav>
+
+    <div class="flex items-center space-x-4">
+      <button class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition text-gray-300">登录</button>
+      <button class="btn-primary px-4 py-2 rounded-lg font-medium">注册</button>
+      <button class="md:hidden text-gray-300">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- 主体内容 -->
+<main class="flex-grow">
+  <!-- Hero 区域 -->
+  <section class="hero-section py-20 px-6">
+    <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-12 md:mb-0">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 glow-text">
+          让<span class="text-blue-400">编程梦想</span><br>
+          在此<span class="text-purple-400">启航</span>
+        </h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-lg">
+          加入Codedream，探索编程的无限可能。从新手到专家，我们为您提供一站式学习平台和开发工具。
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <button class="btn-primary px-8 py-3 rounded-xl font-semibold text-lg">
+            开始探索 <i class="ml-2 fas fa-arrow-right"></i>
+          </button>
+          <button class="px-8 py-3 rounded-xl font-semibold text-lg bg-gray-800 hover:bg-gray-700 transition">
+            <i class="fas fa-play-circle mr-2 text-blue-400"></i> 观看演示
+          </button>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 relative">
+        <div class="relative">
+          <div class="absolute -top-10 -right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-soft-light filter blur-3xl opacity-30"></div>
+          <div class="absolute bottom-10 -left-10 w-64 h-64 bg-blue-500 rounded-full mix-blend-soft-light filter blur-3xl opacity-30"></div>
+
+          <div class="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-1 shadow-2xl">
+            <div class="bg-gray-900 rounded-xl overflow-hidden">
+              <div class="h-8 bg-gray-800 flex items-center px-4">
+                <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <div class="p-6">
+                <div class="text-blue-400 font-mono">
+                  <div><span class="text-purple-400">class</span> <span class="text-yellow-400">Codedream</span> {</div>
+                  <div class="ml-4"><span class="text-purple-400">constructor</span>() {</div>
+                  <div class="ml-8"><span class="text-green-400">this</span>.dream = <span class="text-amber-400">"编程改变世界"</span>;</div>
+                  <div class="ml-8"><span class="text-green-400">this</span>.platform = <span class="text-amber-400">"开发者家园"</span>;</div>
+                  <div class="ml-4">}</div>
+                  <div class="ml-4"><span class="text-purple-400">launch</span>() {</div>
+                  <div class="ml-8"><span class="text-blue-400">return</span> <span class="text-amber-400">"梦想从这里启航"</span>;</div>
+                  <div class="ml-4">}</div>
+                  <div>}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 特性展示 -->
+  <section class="py-16 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">学技术就上 <span class="text-blue-400">Codedream</span>!</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-xl">
+          我们提供全方位的开发工具和学习资源，助您快速提升编程技能
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 特性卡片 1 -->
+        <div class="card rounded-2xl p-8">
+          <div class="feature-icon bg-gradient-to-br from-blue-500 to-blue-700">
+            <i class="fas fa-laptop-code text-white text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">交互式学习环境</h3>
+          <p class="text-gray-400 mb-4">
+            直接在浏览器中编写和运行代码，实时查看结果，无需复杂环境配置。
+          </p>
+          <a href="#" class="text-blue-400 font-medium flex items-center">
+            了解更多 <i class="fas fa-arrow-right ml-2 text-sm"></i>
+          </a>
+        </div>
+
+        <!-- 特性卡片 2 -->
+        <div class="card rounded-2xl p-8">
+          <div class="feature-icon bg-gradient-to-br from-purple-500 to-purple-700">
+            <i class="fas fa-graduation-cap text-white text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">专业学习路径</h3>
+          <p class="text-gray-400 mb-4">
+            精心设计的课程体系，从基础到进阶，涵盖主流编程语言和技术栈。
+          </p>
+          <a href="#" class="text-purple-400 font-medium flex items-center">
+            探索课程 <i class="fas fa-arrow-right ml-2 text-sm"></i>
+          </a>
+        </div>
+
+        <!-- 特性卡片 3 -->
+        <div class="card rounded-2xl p-8">
+          <div class="feature-icon bg-gradient-to-br from-cyan-500 to-cyan-700">
+            <i class="fas fa-users text-white text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">活跃开发者社区</h3>
+          <p class="text-gray-400 mb-4">
+            与全球开发者交流经验，解决难题，参与开源项目，共同成长。
+          </p>
+          <a href="#" class="text-cyan-400 font-medium flex items-center">
+            加入社区 <i class="fas fa-arrow-right ml-2 text-sm"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技术栈展示 -->
+  <section class="py-16 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">支持多种<span class="text-blue-400">语言</span></h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-xl">
+          从Web开发到数据科学，覆盖前沿技术领域
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <div class="bg-gray-800 rounded-xl p-6 flex flex-col items-center justify-center h-40">
+          <i class="fab fa-html5 text-5xl text-orange-500 mb-3"></i>
+          <span class="text-gray-300 font-medium">HTML5</span>
+        </div>
+        <div class="bg-gray-800 rounded-xl p-6 flex flex-col items-center justify-center h-40">
+          <i class="fab fa-css3-alt text-5xl text-blue-500 mb-3"></i>
+          <span class="text-gray-300 font-medium">CSS3</span>
+        </div>
+        <div class="bg-gray-800 rounded-xl p-6 flex flex-col items-center justify-center h-40">
+          <i class="fab fa-js text-5xl text-yellow-400 mb-3"></i>
+          <span class="text-gray-300 font-medium">JavaScript</span>
+        </div>
+        <div class="bg-gray-800 rounded-xl p-6 flex flex-col items-center justify-center h-40">
+          <i class="fab fa-python text-5xl text-blue-400 mb-3"></i>
+          <span class="text-gray-300 font-medium">Python</span>
+        </div>
+        <div class="bg-gray-800 rounded-xl p-6 flex flex-col items-center justify-center h-40">
+          <i class="fab fa-react text-5xl text-cyan-400 mb-3"></i>
+          <span class="text-gray-300 font-medium">React</span>
+        </div>
+        <div class="bg-gray-800 rounded-xl p-6 flex flex-col items-center justify-center h-40">
+          <i class="fas fa-database text-5xl text-emerald-500 mb-3"></i>
+          <span class="text-gray-300 font-medium">Database</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 统计展示 -->
+  <section class="py-16 px-6">
+    <div class="container mx-auto max-w-6xl bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-2xl p-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="p-6">
+          <div class="text-4xl md:text-5xl font-bold text-blue-400 mb-2">等待开发</div>
+          <div class="text-gray-300">活跃开发者</div>
+        </div>
+        <div class="p-6">
+          <div class="text-4xl md:text-5xl font-bold text-purple-400 mb-2">等待开发</div>
+          <div class="text-gray-300">专业课程</div>
+        </div>
+        <div class="p-6">
+          <div class="text-4xl md:text-5xl font-bold text-cyan-400 mb-2">等待开发</div>
+          <div class="text-gray-300">代码项目</div>
+        </div>
+        <div class="p-6">
+          <div class="text-4xl md:text-5xl font-bold text-green-400 mb-2">98%</div>
+          <div class="text-gray-300">用户满意度</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- 页脚 -->
+<footer class="bg-gray-900 border-t border-gray-800">
+  <div class="container mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <div class="flex items-center mb-6">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center mr-3">
+            <i class="fas fa-code text-white text-xl"></i>
+          </div>
+          <h2 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Codedream</h2>
+        </div>
+        <p class="text-gray-400 mb-6">
+          为开发者打造的梦想平台，提供学习、实践和交流的全方位服务。
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <i class="fab fa-twitter text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <i class="fab fa-linkedin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition">
+            <i class="fab fa-discord text-xl"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-bold mb-6">刷题</h3>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-gray-400 hover:text-white transition">学习平台</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">代码编辑器</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">项目托管</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">开发者工具</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-bold mb-6">资源</h3>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-gray-400 hover:text-white transition">文档中心</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">教程视频</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">博客文章</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition">社区论坛</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-bold mb-6">订阅更新</h3>
+        <p class="text-gray-400 mb-4">订阅我们的新闻通讯，获取最新刷题更新和开发技巧。</p>
+        <div class="flex">
+          <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 bg-gray-800 rounded-l-lg focus:outline-none w-full">
+          <button class="bg-blue-600 hover:bg-blue-700 px-4 rounded-r-lg">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+      <p>© 2025 Codedream. 保留所有权利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 引入 Vue.js (CDN) -->
+<script src="https://unpkg.com/vue@3"></script>
+<script>
+  const { createApp } = Vue;
+  createApp({
+    data() {
+      return {
+        features: [
+          { title: "交互式学习环境", icon: "laptop-code", color: "blue" },
+          { title: "专业学习路径", icon: "graduation-cap", color: "purple" },
+          { title: "活跃开发者社区", icon: "users", color: "cyan" }
+        ]
+      }
+    }
+  }).mount('#app');
+</script>
+
+<!-- 后端交互逻辑代码 -->
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        stats: {
+          users: 0,
+          courses: 0,
+          projects: 0,
+          satisfaction: 0
+        },
+        features: [],
+        techStacks: [],
+        email: '',
+        isSubmitting: false,
+        subscribeMessage: ''
+      }
+    },
+    mounted() {
+      this.fetchStats();
+      this.fetchFeatures();
+      this.fetchTechStacks();
+    },
+    methods: {
+      // 获取统计数据
+      async fetchStats() {
+        try {
+          const response = await fetch('/api/stats');
+          const data = await response.json();
+          if (data.success) {
+            this.stats = data.data;
+          }
+        } catch (error) {
+          console.error('获取统计数据失败:', error);
+        }
+      },
+
+      // 获取特性列表
+      async fetchFeatures() {
+        try {
+          const response = await fetch('/api/features');
+          const data = await response.json();
+          if (data.success) {
+            this.features = data.data;
+          }
+        } catch (error) {
+          console.error('获取特性列表失败:', error);
+        }
+      },
+
+      // 获取技术栈列表
+      async fetchTechStacks() {
+        try {
+          const response = await fetch('/api/tech-stacks');
+          const data = await response.json();
+          if (data.success) {
+            this.techStacks = data.data;
+          }
+        } catch (error) {
+          console.error('获取技术栈列表失败:', error);
+        }
+      },
+
+      // 处理订阅
+      async handleSubscribe() {
+        if (!this.email || !this.validateEmail(this.email)) {
+          this.subscribeMessage = '请输入有效的邮箱地址';
+          return;
+        }
+
+        this.isSubmitting = true;
+        this.subscribeMessage = '';
+
+        try {
+          const response = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: this.email })
+          });
+
+          const data = await response.json();
+          this.subscribeMessage = data.message;
+
+          if (data.success) {
+            this.email = '';
+          }
+        } catch (error) {
+          this.subscribeMessage = '订阅失败，请稍后再试';
+          console.error('订阅请求失败:', error);
+        } finally {
+          this.isSubmitting = false;
+        }
+      },
+
+      // 邮箱验证
+      validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      },
+
+      // 格式化统计数字
+      formatNumber(num) {
+        if (num >= 1000000) {
+          return (num / 1000000).toFixed(1) + 'M+';
+        } else if (num >= 1000) {
+          return (num / 1000).toFixed(0) + 'K+';
+        }
+        return num;
+      }
+    }
+  }).mount('#app');
+</script>
 </body>
 </html>

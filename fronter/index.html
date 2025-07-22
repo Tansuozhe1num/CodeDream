@@ -109,7 +109,7 @@
 
     <nav class="hidden md:flex space-x-8">
       <a href="#" class="text-gray-300 hover:text-white transition">首页</a>
-      <a href="#" class="text-gray-300 hover:text-white transition">产品</a>
+      <a href="problems.html" class="text-gray-300 hover:text-white transition">刷题</a>
       <a href="#" class="text-gray-300 hover:text-white transition">教程</a>
       <a href="#" class="text-gray-300 hover:text-white transition">社区</a>
       <a href="#" class="text-gray-300 hover:text-white transition">关于</a>
@@ -280,15 +280,15 @@
     <div class="container mx-auto max-w-6xl bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-2xl p-10">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         <div class="p-6">
-          <div class="text-4xl md:text-5xl font-bold text-blue-400 mb-2">50K+</div>
+          <div class="text-4xl md:text-5xl font-bold text-blue-400 mb-2">等待开发</div>
           <div class="text-gray-300">活跃开发者</div>
         </div>
         <div class="p-6">
-          <div class="text-4xl md:text-5xl font-bold text-purple-400 mb-2">120+</div>
+          <div class="text-4xl md:text-5xl font-bold text-purple-400 mb-2">等待开发</div>
           <div class="text-gray-300">专业课程</div>
         </div>
         <div class="p-6">
-          <div class="text-4xl md:text-5xl font-bold text-cyan-400 mb-2">1M+</div>
+          <div class="text-4xl md:text-5xl font-bold text-cyan-400 mb-2">等待开发</div>
           <div class="text-gray-300">代码项目</div>
         </div>
         <div class="p-6">
@@ -331,7 +331,7 @@
       </div>
 
       <div>
-        <h3 class="text-lg font-bold mb-6">产品</h3>
+        <h3 class="text-lg font-bold mb-6">刷题</h3>
         <ul class="space-y-3">
           <li><a href="#" class="text-gray-400 hover:text-white transition">学习平台</a></li>
           <li><a href="#" class="text-gray-400 hover:text-white transition">代码编辑器</a></li>
@@ -352,7 +352,7 @@
 
       <div>
         <h3 class="text-lg font-bold mb-6">订阅更新</h3>
-        <p class="text-gray-400 mb-4">订阅我们的新闻通讯，获取最新产品更新和开发技巧。</p>
+        <p class="text-gray-400 mb-4">订阅我们的新闻通讯，获取最新刷题更新和开发技巧。</p>
         <div class="flex">
           <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 bg-gray-800 rounded-l-lg focus:outline-none w-full">
           <button class="bg-blue-600 hover:bg-blue-700 px-4 rounded-r-lg">
@@ -380,6 +380,123 @@
           { title: "专业学习路径", icon: "graduation-cap", color: "purple" },
           { title: "活跃开发者社区", icon: "users", color: "cyan" }
         ]
+      }
+    }
+  }).mount('#app');
+</script>
+
+<!-- 后端交互逻辑代码 -->
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        stats: {
+          users: 0,
+          courses: 0,
+          projects: 0,
+          satisfaction: 0
+        },
+        features: [],
+        techStacks: [],
+        email: '',
+        isSubmitting: false,
+        subscribeMessage: ''
+      }
+    },
+    mounted() {
+      this.fetchStats();
+      this.fetchFeatures();
+      this.fetchTechStacks();
+    },
+    methods: {
+      // 获取统计数据
+      async fetchStats() {
+        try {
+          const response = await fetch('/api/stats');
+          const data = await response.json();
+          if (data.success) {
+            this.stats = data.data;
+          }
+        } catch (error) {
+          console.error('获取统计数据失败:', error);
+        }
+      },
+
+      // 获取特性列表
+      async fetchFeatures() {
+        try {
+          const response = await fetch('/api/features');
+          const data = await response.json();
+          if (data.success) {
+            this.features = data.data;
+          }
+        } catch (error) {
+          console.error('获取特性列表失败:', error);
+        }
+      },
+
+      // 获取技术栈列表
+      async fetchTechStacks() {
+        try {
+          const response = await fetch('/api/tech-stacks');
+          const data = await response.json();
+          if (data.success) {
+            this.techStacks = data.data;
+          }
+        } catch (error) {
+          console.error('获取技术栈列表失败:', error);
+        }
+      },
+
+      // 处理订阅
+      async handleSubscribe() {
+        if (!this.email || !this.validateEmail(this.email)) {
+          this.subscribeMessage = '请输入有效的邮箱地址';
+          return;
+        }
+
+        this.isSubmitting = true;
+        this.subscribeMessage = '';
+
+        try {
+          const response = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: this.email })
+          });
+
+          const data = await response.json();
+          this.subscribeMessage = data.message;
+
+          if (data.success) {
+            this.email = '';
+          }
+        } catch (error) {
+          this.subscribeMessage = '订阅失败，请稍后再试';
+          console.error('订阅请求失败:', error);
+        } finally {
+          this.isSubmitting = false;
+        }
+      },
+
+      // 邮箱验证
+      validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      },
+
+      // 格式化统计数字
+      formatNumber(num) {
+        if (num >= 1000000) {
+          return (num / 1000000).toFixed(1) + 'M+';
+        } else if (num >= 1000) {
+          return (num / 1000).toFixed(0) + 'K+';
+        }
+        return num;
       }
     }
   }).mount('#app');
