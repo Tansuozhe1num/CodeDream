@@ -8,14 +8,6 @@ import (
 func NewRouter() *gin.Engine {
 	r := gin.Default()
 
-	// 静态文件服务 - SPA 应用
-	r.StaticFile("/", "./static/index.html")
-	r.StaticFile("/index.html", "./static/index.html")
-	r.StaticFile("/problems.html", "./static/problems.html")
-	r.StaticFile("/community.html", "./static/community.html") // 添加社区页面路由
-	r.Static("/static", "./static/static")
-	r.Static("/assets", "./static/assets")
-
 	// API 路由组
 	api := r.Group("/api")
 	{
@@ -37,6 +29,18 @@ func NewRouter() *gin.Engine {
 			community.GET("/active-users", handler.HandleActiveUsers) // 活跃用户
 		}
 	}
+
+	getPage := func() {
+		// 静态文件服务 - SPA 应用
+		r.StaticFile("/", "./static/index.html")
+		r.StaticFile("/index.html", "./static/index.html")
+		r.StaticFile("/problems.html", "./static/problems.html")
+		r.StaticFile("/community.html", "./static/community.html") // 添加社区页面路由
+		r.Static("/static", "./static/static")
+		r.Static("/assets", "./static/assets")
+	}
+
+	getPage()
 
 	// 单页面应用路由 - 所有未匹配的路由返回index.html
 	r.NoRoute(func(c *gin.Context) {
