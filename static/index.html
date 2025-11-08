@@ -116,8 +116,16 @@
     </nav>
 
     <div class="flex items-center space-x-4">
-      <button class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition text-gray-300">登录</button>
-      <button class="btn-primary px-4 py-2 rounded-lg font-medium">注册</button>
+      <!-- 已登录时显示用户名 -->
+      <div id="userInfo" class="hidden items-center space-x-3">
+        <span class="text-gray-300" id="usernameDisplay"></span>
+        <button onclick="handleLogout()" class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition text-gray-300">登出</button>
+      </div>
+      <!-- 未登录时显示登录/注册按钮 -->
+      <div id="authButtons" class="flex items-center space-x-4">
+        <button onclick="showLoginModal()" class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition text-gray-300">登录</button>
+        <button onclick="showRegisterModal()" class="btn-primary px-4 py-2 rounded-lg font-medium">注册</button>
+      </div>
       <button class="md:hidden text-gray-300">
         <i class="fas fa-bars text-xl"></i>
       </button>
@@ -500,6 +508,245 @@
       }
     }
   }).mount('#app');
+</script>
+
+<!-- 登录/注册模态框 -->
+<div id="authModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4">
+    <div class="flex justify-between items-center mb-6">
+      <h2 id="modalTitle" class="text-2xl font-bold text-white">登录</h2>
+      <button onclick="closeAuthModal()" class="text-gray-400 hover:text-white">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+    
+    <form id="authForm" onsubmit="handleAuth(event)">
+      <div id="registerFields" class="hidden mb-4">
+        <label class="block text-gray-300 mb-2">邮箱</label>
+        <input type="email" id="email" class="w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-300 mb-2">用户名</label>
+        <input type="text" id="username" class="w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+      
+      <div class="mb-6">
+        <label class="block text-gray-300 mb-2">密码</label>
+        <input type="password" id="password" class="w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+      
+      <div id="errorMessage" class="hidden mb-4 p-3 bg-red-500 bg-opacity-20 border border-red-500 rounded-lg text-red-300"></div>
+      
+      <button type="submit" class="w-full btn-primary py-3 rounded-lg font-semibold">
+        <span id="submitText">登录</span>
+      </button>
+    </form>
+    
+    <div class="mt-4 text-center">
+      <span id="switchText" class="text-gray-400">还没有账号？</span>
+      <button id="switchButton" onclick="switchAuthMode()" class="text-blue-400 hover:text-blue-300 ml-2">立即注册</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// 认证相关全局变量
+let isLoginMode = true;
+let currentUser = null;
+
+// 页面加载时检查登录状态
+document.addEventListener('DOMContentLoaded', function() {
+  checkAuthStatus();
+});
+
+// 检查登录状态
+async function checkAuthStatus() {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/auth/me', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
+      credentials: 'include'
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success && data.user) {
+        currentUser = data.user;
+        updateUIForLoggedIn(data.user);
+      } else {
+        localStorage.removeItem('token');
+        updateUIForLoggedOut();
+      }
+    } else {
+      localStorage.removeItem('token');
+      updateUIForLoggedOut();
+    }
+  } catch (error) {
+    console.error('检查登录状态失败:', error);
+    localStorage.removeItem('token');
+    updateUIForLoggedOut();
+  }
+}
+
+// 更新UI为已登录状态
+function updateUIForLoggedIn(user) {
+  document.getElementById('userInfo').classList.remove('hidden');
+  document.getElementById('userInfo').classList.add('flex');
+  document.getElementById('authButtons').classList.add('hidden');
+  document.getElementById('usernameDisplay').textContent = user.username;
+}
+
+// 更新UI为未登录状态
+function updateUIForLoggedOut() {
+  document.getElementById('userInfo').classList.add('hidden');
+  document.getElementById('userInfo').classList.remove('flex');
+  document.getElementById('authButtons').classList.remove('hidden');
+}
+
+// 显示登录模态框
+function showLoginModal() {
+  isLoginMode = true;
+  document.getElementById('modalTitle').textContent = '登录';
+  document.getElementById('submitText').textContent = '登录';
+  document.getElementById('registerFields').classList.add('hidden');
+  document.getElementById('switchText').textContent = '还没有账号？';
+  document.getElementById('switchButton').textContent = '立即注册';
+  document.getElementById('authModal').classList.remove('hidden');
+  document.getElementById('errorMessage').classList.add('hidden');
+  document.getElementById('authForm').reset();
+}
+
+// 显示注册模态框
+function showRegisterModal() {
+  isLoginMode = false;
+  document.getElementById('modalTitle').textContent = '注册';
+  document.getElementById('submitText').textContent = '注册';
+  document.getElementById('registerFields').classList.remove('hidden');
+  document.getElementById('switchText').textContent = '已有账号？';
+  document.getElementById('switchButton').textContent = '立即登录';
+  document.getElementById('authModal').classList.remove('hidden');
+  document.getElementById('errorMessage').classList.add('hidden');
+  document.getElementById('authForm').reset();
+}
+
+// 切换登录/注册模式
+function switchAuthMode() {
+  if (isLoginMode) {
+    showRegisterModal();
+  } else {
+    showLoginModal();
+  }
+}
+
+// 关闭模态框
+function closeAuthModal() {
+  document.getElementById('authModal').classList.add('hidden');
+  document.getElementById('errorMessage').classList.add('hidden');
+}
+
+// 处理登录/注册
+async function handleAuth(event) {
+  event.preventDefault();
+  
+  const errorDiv = document.getElementById('errorMessage');
+  errorDiv.classList.add('hidden');
+  
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const email = isLoginMode ? null : document.getElementById('email').value;
+  
+  const url = isLoginMode ? '/api/auth/login' : '/api/auth/register';
+  const body = isLoginMode 
+    ? { username, password }
+    : { username, password, email };
+  
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+      credentials: 'include' // 包含Cookie
+    });
+    
+    // 检查响应状态
+    if (!response.ok) {
+      // 尝试解析错误响应
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch (e) {
+        errorData = { error: '服务器错误: ' + response.status };
+      }
+      errorDiv.textContent = errorData.error || '请求失败';
+      errorDiv.classList.remove('hidden');
+      return;
+    }
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      // 保存token
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+      }
+      currentUser = data.user;
+      
+      // 更新UI
+      updateUIForLoggedIn(data.user);
+      closeAuthModal();
+      
+      // 显示成功消息
+      alert(isLoginMode ? '登录成功！' : '注册成功！');
+      
+      // 刷新页面以更新所有状态
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    } else {
+      // 显示错误消息
+      errorDiv.textContent = data.error || '操作失败';
+      errorDiv.classList.remove('hidden');
+    }
+  } catch (error) {
+    errorDiv.textContent = '网络错误，请稍后再试: ' + (error.message || '未知错误');
+    errorDiv.classList.remove('hidden');
+    console.error('认证请求失败:', error);
+  }
+}
+
+// 处理登出
+async function handleLogout() {
+  try {
+    await fetch('/api/auth/logout', {
+      method: 'POST'
+    });
+  } catch (error) {
+    console.error('登出请求失败:', error);
+  }
+  
+  // 清除本地存储
+  localStorage.removeItem('token');
+  currentUser = null;
+  
+  // 更新UI
+  updateUIForLoggedOut();
+  
+  alert('已登出');
+}
+
+// 获取认证token（供其他脚本使用）
+function getAuthToken() {
+  return localStorage.getItem('token');
+}
 </script>
 </body>
 </html>
